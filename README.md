@@ -10,9 +10,11 @@ Configurația mea de Neovim, bazată pe [kickstart.nvim](https://github.com/nvim
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/andyktco/nvim-config/main/install.sh)
-source ~/.bashrc
+exec $SHELL
 nvim
 ```
+
+`exec $SHELL` reîncarcă terminalul, ca să găsească `nvim`. Merge și în **bash**, și în **zsh**: scriptul adaugă `~/.local/bin` în PATH în `~/.bashrc` și, dacă serverul are zsh, și în `~/.zshrc`.
 
 La prima pornire, pluginurile, parserele și uneltele LSP se instalează singure. Durează cam un minut.
 

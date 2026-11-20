@@ -14,7 +14,12 @@ esac
 
 mkdir -p ~/.local/bin ~/.local/opt
 export PATH="$HOME/.local/bin:$PATH"
-grep -q 'HOME/.local/bin' ~/.bashrc 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >>~/.bashrc
+# Add ~/.local/bin to PATH for bash and zsh
+RCS=(~/.bashrc)
+{ [ -f ~/.zshrc ] || command -v zsh >/dev/null; } && RCS+=(~/.zshrc)
+for rc in "${RCS[@]}"; do
+  grep -q 'HOME/.local/bin' "$rc" 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >>"$rc"
+done
 
 # 1. System packages (Ubuntu/Debian)
 PKGS=""
@@ -65,5 +70,5 @@ if command -v node >/dev/null; then
   [ "$NODE_MAJOR" -lt 18 ] && echo "!! Node $(node -v) is old; PHP/Tailwind LSPs need Node 18+ (https://github.com/nodesource/distributions)"
 fi
 
-echo ">> Done. Open a new shell (or: source ~/.bashrc), then run 'nvim'."
+echo ">> Done. Reload your shell (exec \$SHELL), then run 'nvim'."
 echo "   Plugins install automatically on first start (wait ~1 min)."
