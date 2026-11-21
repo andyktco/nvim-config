@@ -1034,6 +1034,7 @@ do
   require 'kickstart.plugins.neo-tree'
   require 'custom.tmux'
   require 'custom.git'
+  require 'custom.autoreload'
 
   -- NOTE: You can add your own plugins, configuration, etc. in `lua/custom/plugins/*.lua`.
   --

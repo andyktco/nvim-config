@@ -6,6 +6,7 @@ Neovim, bazat pe [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), c
 
 - **neo-tree**, exploratorul de fișiere din stânga
 - **taburi** sus, cu fișierele deschise (mini.tabline)
+- **reîncărcare automată** a fișierelor modificate din afara nvim (Claude, git, scripturi), verificată la fiecare secundă
 - **diffview**: lista fișierelor modificate în git + diff în două panouri, ca în PhpStorm
 - suport pentru **Laravel / Filament**: PHP (intelephense), Blade, Tailwind, Emmet, Pint, blade-formatter
 
@@ -32,7 +33,7 @@ La prima pornire a lui nvim, uneltele LSP se instalează în fundal. Durează ca
 
 ### Ce face `install.sh`
 
-1. Instalează cu `apt` pachetele care lipsesc: `git`, `curl`, `build-essential`, `unzip`, `ripgrep`, `nodejs`, `npm`, `tmux`. Pentru asta cere parola de `sudo`.
+1. Instalează cu `apt` pachetele care lipsesc: `git`, `curl`, `build-essential`, `unzip`, `ripgrep`, `nodejs`, `npm`, `tmux`, `inotify-tools`. Pentru asta cere parola de `sudo`.
 2. Instalează `tree-sitter` și Neovim **0.12.6** în `~/.local/bin`, fără `sudo`.
 3. Clonează configurația în `~/.config/nvim`. Dacă exista deja o configurație acolo, o mută în `~/.config/nvim.bak.<timestamp>`. Dacă e deja clonată, doar o actualizează (`git pull`).
 4. Aliniază pluginurile nvim la versiunile din `nvim-pack-lock.json`, ca serverul să aibă exact aceleași versiuni.

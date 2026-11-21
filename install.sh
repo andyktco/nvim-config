@@ -40,6 +40,7 @@ main() {
   command -v rg >/dev/null || PKGS+=" ripgrep"
   command -v node >/dev/null || PKGS+=" nodejs npm"
   command -v tmux >/dev/null || PKGS+=" tmux"
+  command -v inotifywait >/dev/null || PKGS+=" inotify-tools" # LSP file watching
   if [ -n "$PKGS" ]; then
     if command -v apt-get >/dev/null; then
       echo ">> Installing:$PKGS (needs sudo)"
