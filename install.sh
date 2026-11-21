@@ -10,6 +10,7 @@ CATPPUCCIN_VERSION="v2.3.2"
 
 CFG=~/.config/nvim
 PLUGINS=~/.tmux/plugins
+CATP=~/.local/share/tmux/catppuccin # outside TPM dir, so clean_plugins keeps it
 
 # Everything is inside main() so bash reads the whole file before running it
 # (the script updates itself via git pull while it runs).
@@ -89,16 +90,16 @@ main() {
   [ -e ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.bak.$(date +%s) && echo ">> Moved old ~/.tmux.conf to backup"
 
   # 7. tmux plugins
-  mkdir -p $PLUGINS/catppuccin
-  if [ -d $PLUGINS/catppuccin/tmux/.git ]; then
-    if [ "$(git -C $PLUGINS/catppuccin/tmux describe --tags 2>/dev/null)" != "$CATPPUCCIN_VERSION" ]; then
+  mkdir -p "$(dirname $CATP)"
+  if [ -d $CATP/.git ]; then
+    if [ "$(git -C $CATP describe --tags 2>/dev/null)" != "$CATPPUCCIN_VERSION" ]; then
       echo ">> Updating catppuccin to $CATPPUCCIN_VERSION"
-      git -C $PLUGINS/catppuccin/tmux fetch -q --depth 1 origin tag "$CATPPUCCIN_VERSION"
-      git -C $PLUGINS/catppuccin/tmux -c advice.detachedHead=false checkout -q "$CATPPUCCIN_VERSION"
+      git -C $CATP fetch -q --depth 1 origin tag "$CATPPUCCIN_VERSION"
+      git -C $CATP -c advice.detachedHead=false checkout -q "$CATPPUCCIN_VERSION"
     fi
   else
     echo ">> Installing catppuccin $CATPPUCCIN_VERSION"
-    git -c advice.detachedHead=false clone -q --depth 1 -b "$CATPPUCCIN_VERSION" https://github.com/catppuccin/tmux.git $PLUGINS/catppuccin/tmux
+    git -c advice.detachedHead=false clone -q --depth 1 -b "$CATPPUCCIN_VERSION" https://github.com/catppuccin/tmux.git $CATP
   fi
 
   if [ -d $PLUGINS/tpm/.git ]; then
