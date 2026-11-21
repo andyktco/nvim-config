@@ -6,6 +6,7 @@ Neovim, bazat pe [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), c
 
 - **neo-tree**, exploratorul de fișiere din stânga
 - **taburi** sus, cu fișierele deschise (mini.tabline)
+- **diffview**: lista fișierelor modificate în git + diff în două panouri, ca în PhpStorm
 - suport pentru **Laravel / Filament**: PHP (intelephense), Blade, Tailwind, Emmet, Pint, blade-formatter
 
 tmux, cu:
@@ -78,6 +79,21 @@ Pe server, ca să iei modificările, rulezi din nou scriptul de instalare (coman
 | `<space>f`            | formatează fișierul                       |
 | `grd`                 | sari la definiție                         |
 | `Ctrl+h` / `Ctrl+l`   | fereastra din stânga / dreapta            |
+
+## Git
+
+| Tastă        | Ce face                                                                  |
+| ------------ | ------------------------------------------------------------------------ |
+| `<space>gd`  | lista fișierelor modificate + diff în două panouri (original / modificat) |
+| `<space>gh`  | istoricul fișierului curent, commit cu commit                            |
+| `<space>gH`  | istoricul întregului repo                                                |
+| `<space>gq`  | închide diff-ul / istoricul                                              |
+| `]c` / `[c`  | următoarea / precedenta modificare                                       |
+| `<space>hp`  | previzualizează modificarea de sub cursor                                |
+| `<space>hr`  | anulează modificarea de sub cursor                                       |
+| `<space>hb`  | cine a modificat linia (blame)                                           |
+
+În lista din diffview: `j`/`k` te miști, `Enter` deschide diff-ul, `Tab` / `Shift+Tab` trec la fișierul următor / anterior, `-` face stage / unstage, `g?` arată toate tastele.
 
 ## tmux
 
