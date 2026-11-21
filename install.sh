@@ -91,15 +91,11 @@ main() {
 
   # 7. tmux plugins
   mkdir -p "$(dirname $CATP)"
-  if [ -d $CATP/.git ]; then
-    if [ "$(git -C $CATP describe --tags 2>/dev/null)" != "$CATPPUCCIN_VERSION" ]; then
-      echo ">> Updating catppuccin to $CATPPUCCIN_VERSION"
-      git -C $CATP fetch -q --depth 1 origin tag "$CATPPUCCIN_VERSION"
-      git -C $CATP -c advice.detachedHead=false checkout -q "$CATPPUCCIN_VERSION"
-    fi
-  else
+  if [ "$(cat $CATP.version 2>/dev/null)" != "$CATPPUCCIN_VERSION" ] || [ ! -f $CATP/catppuccin.tmux ]; then
     echo ">> Installing catppuccin $CATPPUCCIN_VERSION"
+    rm -rf $CATP
     git -c advice.detachedHead=false clone -q --depth 1 -b "$CATPPUCCIN_VERSION" https://github.com/catppuccin/tmux.git $CATP
+    echo "$CATPPUCCIN_VERSION" >$CATP.version
   fi
 
   if [ -d $PLUGINS/tpm/.git ]; then
